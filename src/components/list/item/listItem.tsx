@@ -2,6 +2,9 @@ import { useTodoContext } from "../../../store/context";
 import { useState } from "react";
 import { EditItem } from "./edititem";
 import { todo } from "../../../models/todo";
+import { Button, Checkbox, Box } from "@mui/material";
+
+
 
 interface TodoItemProps {
   todo:todo
@@ -44,17 +47,28 @@ export const ListItem: React.FC<TodoItemProps> = ({ todo, onChecked, onDelete })
     setEditedTitle(todo.title);
   };
 
-  return <li>
-      <input type="checkbox" checked={todo.completed} onChange={handleCheckboxChange} />
+  return <Box
+  sx={{
+    width: 500,
+    height: 70,
+    display: 'flex',
+alignItems:'center',
+gap:1,
+border: "1px solid blue",
+padding:1
+
+  }}
+>
+      <Checkbox checked={todo.completed} onChange={handleCheckboxChange} />
       {editMode ? (
        <EditItem editedTitle={editedTitle} setEditedTitle={setEditedTitle}
         handleCancelClick={handleCancelClick} handleSaveClick={handleSaveClick}/>
       ) : (
         <>
       <span>{todo.title}</span>
-      <button onClick={handleEditClick}>Edit</button>
-      <button onClick={handleDeleteClick}>Delete</button>
+      <Button variant="outlined" onClick={handleEditClick}>Edit</Button>
+      <Button variant="outlined" onClick={handleDeleteClick}>Delete</Button>
     </>
   )}
-  </li>
+  </Box>
 };

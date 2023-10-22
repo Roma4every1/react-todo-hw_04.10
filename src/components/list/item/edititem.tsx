@@ -1,3 +1,5 @@
+import { Button, TextField } from "@mui/material"
+
 interface Props {
     editedTitle:string
     setEditedTitle:(e:any)=>void
@@ -8,8 +10,8 @@ interface Props {
 export const EditItem:React.FC<Props> = props => {
     const {editedTitle, setEditedTitle, handleSaveClick,handleCancelClick } = props
     return <>
-    <input type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
-          <button onClick={handleSaveClick}>Save</button>
-          <button onClick={handleCancelClick}>Cancel</button>
+    <TextField  variant="standard"  type="text" value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)} />
+          <Button variant="text" onClick={handleSaveClick}>Save</Button>
+          <Button variant="text" onClick={handleCancelClick}>Cancel</Button>
     </>
 }

@@ -1,15 +1,14 @@
-import React, {useState, BaseSyntheticEvent} from "react"
+import React, {useRef} from "react"
+import { TextField } from "@mui/material"
 interface Props {
 onChange: (newValue:string)=>void
 }
 const Input: React.FC<Props> = props => {
     const {onChange} = props
-    const [value, setValue] = useState<string>("")
-   const handleChange = (event:BaseSyntheticEvent) => {
-setValue(event.target.value)
-onChange(event.target.value)
-
+    const inputRef = useRef<HTMLInputElement>(null)
+   const handleChange = () => {
+onChange(inputRef.current?.value || "")
    }
-    return<input value={value} onChange={handleChange} placeholder="title"></input>
+    return<TextField label="Filled" variant="filled" ref={inputRef} onChange={handleChange} placeholder="title"></TextField>
 }
 export default Input
