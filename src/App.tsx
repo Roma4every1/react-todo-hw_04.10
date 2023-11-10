@@ -1,18 +1,23 @@
 import { useEffect } from "react";
-import { TodoProvider, useTodoContext } from "./store/context";
-import Form from "./components/form+useRef/form";
+import Form from "./components/form/form";
 import List from "./components/list/list";
 import DeletedTodoButton from "./components/button/button";
+import { useAppDispatch, useAppSelector } from "./store/store";
+import { getTodosDataAction } from "./store/reducers/taskReducer/actions";
+import { getUsersDataAction } from "./store/reducers/userReducer/actions";
 
 const App: React.FC = () => {
-
-  return (
-    <TodoProvider>
-      
+  const dispatch=useAppDispatch()
+  useEffect(() => {
+    dispatch(getUsersDataAction())
+  dispatch(getTodosDataAction())
+  }, []);
+const {users} = useAppSelector(state=>state.userReducer)
+console.log(users)
+  return (  <>
       <Form />
       <DeletedTodoButton />
-      <List />
-    </TodoProvider>
+      <List /></>  
   );
 };
 

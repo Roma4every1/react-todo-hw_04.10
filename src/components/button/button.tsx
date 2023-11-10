@@ -1,12 +1,13 @@
-import { useTodoContext } from "../../store/context";
 import { Button, Box } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { setDeletedTodo, setTodosToStore } from "../../store/reducers/taskReducer/actions";
 
 const DeletedTodoButton: React.FC = () => {
-  const { deletedTodo, setDeletedTodo, setTodos, todos } = useTodoContext();
-
+const {todos, deletedTodo} = useAppSelector(state=>state.taskReducer)
+const dispatch = useAppDispatch()
   const handleRestoreClick = () => {
-    setTodos([deletedTodo!,...todos]);
-    setDeletedTodo(null);
+    dispatch(setTodosToStore([deletedTodo!,...todos]));
+    dispatch(setDeletedTodo(null));
   };
 
   return (<Box sx={{display:'flex',
